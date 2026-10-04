@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Amor’in Burguer 🍔</title>
+  <meta name="description" content="Amor’in Burguer — Sabor que apaixona, da primeira à última mordida.">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    :root {
+      --vermelho: #641b12;
+      --vermelho-escuro: #46120d;
+      --vermelho-claro: #8b2b1e;
+      --creme: #f7f2ea;
+      --creme-2: #fffaf4;
+      --marrom: #24130f;
+      --texto: #2b211d;
+      --branco: #ffffff;
+      --cinza: #77716d;
+      --borda: #eaded4;
+    }
+
+    body {
+      background: var(--creme);
+      color: var(--texto);
+    }
+
+    header {
+      background: var(--vermelho);
+      color: white;
+      text-align: center;
+      padding: 18px 15px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 3px 12px rgba(0,0,0,.18);
+    }
+
+    header h1 {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      margin-top: 5px;
+      font-size: 14px;
+    }
+
+    /* HERO */
+
+  .hero {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      overflow: hidden;
+      background: #000;
+    }
+
+  .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+  .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,.05),
+        rgba(0,0,0,.72)
+      );
+    }
+
+  .hero-text {
+      position: absolute;
+      z-index: 2;
+      bottom: 35px;
+      left: 20px;
+      right: 20px;
+      text-align: center;
+      color: white;
+    }
+
+  .hero-text h2 {
+      font-size: clamp(28px, 6vw, 52px);
+      font-weight: 900;
+      text-shadow: 0 3px 8px #000;
+    }
+
+  .hero-text p {
+      margin-top: 10px;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+  .container {
+      max-width: 1050px;
+      margin: auto;
+      padding: 25px 15px 100px;
+    }
+
+  .categoria {
+      margin-top: 25px;
+      margin-bottom: 12px;
+      color: var(--vermelho);
+      font-size: 25px;
+      font-weight: 900;
+      border-bottom: 2px solid var(--borda);
+      padding-bottom: 8px;
+    }
+
+  .subtitulo {
+      color: var(--cinza);
+      margin-bottom: 15px;
+    }
+
+  .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+  .card {
+      background: var(--creme-2);
+      border: 2px solid var(--borda);
+      border-radius: 16px;
+      padding: 17px;
+      box-shadow: 0 3px 10px rgba(60,20,10,.07);
+      transition:.2s;
+    }
+
+  .card:hover {
+      transform: translateY(-2px);
+    }
+
+  .nome {
+      color: var(--vermelho);
+      font-size: 19px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing:.5px;
+      line-height: 1.2;
+    }
+
+  .preco {
+      margin-top: 7px;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--marrom);
+    }
+
+  .ingredientes {
+      margin-top: 9px;
+      color: var(--cinza);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+  .controles {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+  .btn-qtd {
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 50%;
+      background: var(--vermelho);
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+  .btn-qtd:active {
+      transform: scale(.94);
+    }
+
+  .qtd {
+      min-width: 25px;
+      text-align: center;
+      font-weight: 900;
+      font-size: 17px;
+    }
+
+  .resumo {
+      margin-top: 35px;
+      background: var(--branco);
+      border: 2px solid var(--borda);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.08);
+    }
+
+  .resumo h2 {
+      color: var(--vermelho);
+      margin-bottom: 15px;
+    }
+
+    #listaPedido {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+  .linha-pedido {
+      padding: 10px;
+      background: var(--creme);
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+  .total {
+      margin-top: 18px;
+      padding-top: 15px;
+      border-top: 2px solid var(--borda);
+      font-size: 22px;
+      font-weight: 900;
+      display: flex;
+      justify-content: space-between;
+    }
+
+  .formulario {
+      margin-top: 25px;
+      display: grid;
+      gap: 12px;
+    }
+
+  .formulario input,
+  .formulario textarea,
+  .formulario select {
+      width: 100%;
+      padding: 13px;
+      border: 2px solid var(--borda);
+      border-radius: 10px;
+      outline: none;
+      font-size: 15px;
+      background: white;
+    }
+
+  .formulario input:focus,
+  .formulario textarea:focus,
+  .formulario select:focus {
+      border-color: var(--vermelho);
+    }
+
+  .linha-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+  .frete-box {
+      background: var(--creme);
+      border-radius: 12px;
+      padding: 13px;
+      font-size: 14px;
+    }
+
+  .btn-whatsapp {
+      margin-top: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      background: var(--vermelho);
+      color: white;
+      font-size: 17px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+  .btn-whatsapp:hover {
+      background: var(--vermelho-escuro);
+    }
+
+  .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 15px;
+    }
+
+  .modal.ativo {
+      display: flex;
+    }
+
+  .modal-conteudo {
+      background: var(--creme-2);
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+  .modal-conteudo h2 {
+      color: var(--vermelho);
+      margin-bottom: 6px;
+    }
+
+  .modal-conteudo p {
+      color: var(--cinza);
+      margin-bottom: 15px;
+    }
+
+  .extra {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px;
+      margin-bottom: 8px;
+      background: white;
+      border: 2px solid var(--borda);
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+  .extra.selecionado {
+      border-color: var(--vermelho);
+      background: #f8e8e4;
+    }
+
+  .extra input {
+      accent-color: var(--vermelho);
+    }
+
+  .modal-botoes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+  .modal-botoes button {
+      padding: 13px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+  .cancelar {
+      background: #ddd;
+    }
+
+  .confirmar {
+      background: var(--vermelho);
+      color: white;
+    }
+
+    footer {
+      background: var(--marrom);
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 700px) {
+    .grid {
+        grid-template-columns: 1fr;
+      }
+    .hero {
+        height: 350px;
+      }
+    .linha-form {
+        grid-template-columns: 1fr;
+      }
+      header h1 {
+        font-size: 23px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>AMOR’IN BURGUER 🍔</h1>
+  <p>Sabor que conquista!</p>
+</header>
+
+<section class="hero">
+  <img
+    src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1600&q=85"
+    alt="Hambúrguer"
+  >
+  <div class="hero-text">
+    <h2>Sabor que apaixona, da primeira à última mordida.</h2>
+    <p>Mais que um lanche, é Amor em forma de Burguer! ❤️</p>
+  </div>
+</section>
+
+<main class="container">
+  <section>
+    <h2 class="categoria">🔥 HAMBÚRGUER TRADICIONAL</h2>
+    <div class="grid" id="tradicionais"></div>
+  </section>
+  <section>
+    <h2 class="categoria">⭐ HAMBÚRGUER ARTESANAL</h2>
+    <div class="grid" id="artesanais"></div>
+  </section>
+  <section>
+    <h2 class="categoria">🍟 PORÇÕES</h2>
+    <div class="grid" id="porcoes"></div>
+  </section>
+  <section>
+    <h2 class="categoria">🥤 BEBIDAS</h2>
+    <div class="grid" id="bebidas"></div>
+  </section>
+  <section>
+    <h2 class="categoria">🍺 CERVEJAS</h2>
+    <div class="grid" id="cervejas"></div>
+  </section>
+  <section>
+    <h2 class="categoria">🍝 MACARRÃO NA CHAPA</h2>
+    <div class="grid" id="macarrao"></div>
+  </section>
+
+  <section class="resumo">
+    <h2>🛒 Seu pedido</h2>
+    <div id="listaPedido"><p>Nenhum item adicionado ainda.</p></div>
+    <div class="total"><span>Total</span><span id="total">R$ 0,00</span></div>
+    <div class="formulario">
+      <input type="text" id="nome" placeholder="Seu nome">
+      <input type="tel" id="telefone" placeholder="Seu telefone">
+      <select id="formaEntrega" onchange="atualizarEntrega()">
+        <option value="delivery">🚚 Delivery</option>
+        <option value="retirada">🏪 Retirada no local</option>
+        <option value="local">🍔 Consumo no local</option>
+      </select>
+      <div id="enderecoCampos">
+        <input type="text" id="cep" placeholder="CEP" maxlength="9" oninput="formatarCEP(this)" onblur="buscarCEP()">
+        <div class="linha-form">
+          <input type="text" id="rua" placeholder="Rua">
+          <input type="text" id="numero" placeholder="Número da casa" onblur="calcularDistancia()">
+        </div>
+        <input type="text" id="bairro" placeholder="Bairro" onblur="calcularDistancia()">
+        <div class="linha-form">
+          <input type="text" id="cidade" placeholder="Cidade">
+          <input type="text" id="estado" placeholder="Estado">
+        </div>
+        <div class="frete-box">
+          <strong>📍 Distância:</strong> <span id="distanciaTexto">Aguardando endereço...</span><br>
+          <strong>🚚 Frete:</strong> <span id="freteTexto">R$ 0,00</span>
+        </div>
+      </div>
+      <textarea id="observacao" rows="3" placeholder="Observação do pedido (opcional)"></textarea>
+      <button class="btn-whatsapp" onclick="enviarWhatsApp()">📲 PEDIR PELO WHATSAPP</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <strong>AMOR’IN BURGUER ❤️</strong><br><br>
+  Rua José Tavares, 171 — Quintino<br>
+  Todos os dias, 18h às 23h
+</footer>
+
+<div class="modal" id="modalExtras">
+  <div class="modal-conteudo">
+    <h2 id="tituloModal">Adicionais</h2>
+    <p>Escolha os adicionais deste hambúrguer. Você pode escolher nenhum.</p>
+    <div id="listaExtras"></div>
+    <div class="modal-botoes">
+      <button class="cancelar" onclick="fecharModal()">Cancelar</button>
+      <button class="confirmar" onclick="confirmarExtras()">Adicionar ao pedido</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const WHATSAPP = "5537999190235";
+const ENDERECO_LOJA = "Rua José Tavares, 171, Quintino, Divinópolis, MG, Brasil";
+
+const tradicionais = [
+  { nome: "X BURGUER", preco: 18, ingredientes: "Pão, bife tradicional, apresuntado, mussarela, alface, tomate, milho, batata palha." },
+  { nome: "X EGG BURGUER", preco: 22, ingredientes: "Pão, bife tradicional, ovo, apresuntado, mussarela, alface, tomate, milho, batata palha." },
+  { nome: "X BACON", preco: 25, ingredientes: "Pão, bife tradicional, bacon, apresuntado, mussarela, alface, tomate, milho, batata palha." },
+  { nome: "X EGG BACON", preco: 28, ingredientes: "Pão, bife tradicional, ovo, bacon, apresuntado, mussarela, alface, tomate, milho, batata palha." },
+  { nome: "X TUDO", preco: 32, ingredientes: "Pão, bife tradicional, frango, ovo, bacon, apresuntado, mussarela, alface, tomate, milho, batata palha." },
+  { nome: "X TUDO NO PRATO", preco: 40, ingredientes: "Pão, 2 bifes tradicionais, 2 ovos, frango, bacon, presunto, mussarela, milho, tomate, batata palha." }
+];
+const artesanais = [
+  { nome: "AMOR CLÁSSICO", preco: 26, ingredientes: "Pão brioche, bife artesanal, apresuntado, mussarela, alface, tomate, milho, batata palha." },
+  { nome: "AMOR SUPREMO", preco: 32, ingredientes: "Pão brioche, bife artesanal, mussarela empanada, cheddar, alface, tomate, cebola roxa." },
+  { nome: "AMOR TROPICAL", preco: 38, ingredientes: "Pão brioche, bife artesanal, bacon, cheddar, abacaxi, alface, tomate, cebola roxa." },
+  { nome: "AMOR TROPICAL SUÍNO", preco: 45, ingredientes: "Pão brioche, bife artesanal, carne suína ao molho barbecue, bacon, cheddar, abacaxi, alface, tomate, cebola roxa." },
+  { nome: "AMOR SUPREMO DUPLO", preco: 40, ingredientes: "Pão brioche, 2 bifes artesanais, mussarela empanada, cheddar, alface, tomate, cebola roxa." }
+];
+const porcoes = [
+  { nome: "BATATA SIMPLES", preco: 20, ingredientes: "Batata frita simples." },
+  { nome: "BATATA COMPLETA", preco: 30, ingredientes: "Batata completa." }
+];
+const bebidas = [
+  { nome: "COCA 1 LITRO", preco: 12, ingredientes: "Coca-Cola 1 litro." },
+  { nome: "COCA 2 LITROS", preco: 18, ingredientes: "Coca-Cola 2 litros." },
+  { nome: "SUCO LATA", preco: 7, ingredientes: "Suco em lata." },
+  { nome: "REFRIGERANTE LATA", preco: 8, ingredientes: "Refrigerante em lata." }
+];
+const cervejas = [
+  { nome: "KAISER LATÃO", preco: 6, ingredientes: "Kaiser Latão." },
+  { nome: "BOA LATÃO", preco: 8, ingredientes: "Boa Latão." },
+  { nome: "BRAHMA LATÃO", preco: 8, ingredientes: "Brahma Latão." },
+  { nome: "ORIGINAL LATÃO", preco: 10, ingredientes: "Original Latão." },
+  { nome: "HEINEKEN LATÃO", preco: 12, ingredientes: "Heineken Latão." }
+];
+const macarrao = [
+  { nome: "MACARRÃO NA CHAPA", preco: 30, ingredientes: "Macarrão ao molho shoyo, frango, bacon, milho, tomate, mussarela." }
+];
+const adicionais = [
+  { nome: "Bife tradicional", preco: 4 },
+  { nome: "Bife artesanal", preco: 9 },
+  { nome: "Mussarela empanada", preco: 9 },
+  { nome: "Abacaxi", preco: 5 },
+  { nome: "Bacon", preco: 9 },
+  { nome: "Ovo", preco: 3 },
+  { nome: "Batata palha", preco: 3 },
+  { nome: "Milho", preco: 3 },
+  { nome: "Mussarela", preco: 3 },
+  { nome: "Apresuntado", preco: 3 }
+];
+
+let carrinho = [];
+let burgerSelecionado = null;
+
+function criarHamburgueres(lista, id) {
+  const container = document.getElementById(id);
+  lista.forEach((item, index) => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="nome">${item.nome}</div>
+      <div class="preco">R$ ${item.preco.toFixed(2).replace(".", ",")}</div>
+      <div class="ingredientes">${item.ingredientes}</div>
+      <div class="controles">
+        <button class="btn-qtd" onclick="diminuirHamburguer('${item.nome}')">−</button>
+        <span class="qtd" id="qtd-${item.nome.replace(/\s/g, '-')}">0</span>
+        <button class="btn-qtd" onclick="adicionarHamburguer('${id}', ${index})">+</button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+function criarDiretos(lista, id) {
+  const container = document.getElementById(id);
+  lista.forEach((item, index) => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="nome">${item.nome}</div>
+      <div class="preco">R$ ${item.preco.toFixed(2).replace(".", ",")}</div>
+      <div class="ingredientes">${item.ingredientes}</div>
+      <div class="controles">
+        <button class="btn-qtd" onclick="alterarDireto('${item.nome}', -1)">−</button>
+        <span class="qtd" id="qtd-${item.nome.replace(/\s/g, '-')}">0</span>
+        <button class="btn-qtd" onclick="alterarDireto('${item.nome}', 1)">+</button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+function adicionarHamburguer(categoria, index) {
+  let lista;
+  if (categoria === "tradicionais") lista = tradicionais;
+  if (categoria === "artesanais") lista = artesanais;
+  const item = lista[index];
+  burgerSelecionado = item;
+  abrirModalExtras();
+}
+function abrirModalExtras() {
+  const lista = document.getElementById("listaExtras");
+  lista.innerHTML = "";
+  const nenhum = document.createElement("label");
+  nenhum.className = "extra";
+  nenhum.innerHTML = `<span><strong>Nenhum adicional</strong><br><small>Sem adicionais</small></span><input type="checkbox" value="nenhum" onchange="selecionarNenhum(this)">`;
+  lista.appendChild(nenhum);
+  adicionais.forEach((extra, index) => {
+    const div = document.createElement("label");
+    div.className = "extra";
+    div.innerHTML = `<span><strong>${extra.nome}</strong><br><small>+ R$ ${extra.preco.toFixed(2).replace(".", ",")}</small></span><input type="checkbox" class="check-extra" data-index="${index}" onchange="atualizarSelecaoExtras()">`;
+    lista.appendChild(div);
+  });
+  document.getElementById("modalExtras").classList.add("ativo");
+}
+function selecionarNenhum(input) {
+  if (!input.checked) return;
+  document.querySelectorAll(".check-extra").forEach(check => { check.checked = false; });
+}
+function atualizarSelecaoExtras() {
+  const selecionados = document.querySelectorAll(".check-extra:checked");
+  if (selecionados.length > 0) {
+    document.querySelector('input[value="nenhum"]').checked = false;
+  }
+}
+function fecharModal() {
+  document.getElementById("modalExtras").classList.remove("ativo");
+  burgerSelecionado = null;
+}
+function confirmarExtras() {
+  if (!burgerSelecionado) return;
+  const nenhum = document.querySelector('input[value="nenhum"]').checked;
+  let extrasEscolhidos = [];
+  if (!nenhum) {
+    document.querySelectorAll(".check-extra:checked").forEach(check => {
+      const index = Number(check.dataset.index);
+      extrasEscolhidos.push(adicionais[index]);
+    });
+  }
+  carrinho.push({ tipo: "hamburguer", nome: burgerSelecionado.nome, preco: burgerSelecionado.preco, adicionais: extrasEscolhidos });
+  fecharModal();
+  atualizarTudo();
+}
+function diminuirHamburguer(nome) {
+  const index = [...carrinho].map((item, i) => ({ item, i })).reverse().find(({ item }) => item.tipo === "hamburguer" && item.nome === nome)?.i;
+  if (index!== undefined) {
+    carrinho.splice(index, 1);
+    atualizarTudo();
+  }
+}
+function alterarDireto(nome, quantidade) {
+  const index = carrinho.findIndex(item => item.tipo === "direto" && item.nome === nome);
+  if (quantidade === 1) {
+    if (index === -1) {
+      let item = encontrarItemDireto(nome);
+      if (!item) return;
+      carrinho.push({ tipo: "direto", nome: item.nome, preco: item.preco, quantidade: 1 });
+    } else {
+      carrinho[index].quantidade++;
+    }
+  }
+  if (quantidade === -1 && index!== -1) {
+    carrinho[index].quantidade--;
+    if (carrinho[index].quantidade <= 0) {
+      carrinho.splice(index, 1);
+    }
+  }
+  atualizarTudo();
+}
+function encontrarItemDireto(nome) {
+  const todas = [...porcoes,...bebidas,...cervejas,...macarrao];
+  return todas.find(item => item.nome === nome);
+}
+function precoItem(item) {
+  if (item.tipo === "direto") return item.preco * item.quantidade;
+  const extras = item.adicionais.reduce((total, extra) => total + extra.preco, 0);
+  return item.preco + extras;
+}
+function atualizarResumo() {
+  const lista = document.getElementById("listaPedido");
+  lista.innerHTML = "";
+  if (carrinho.length === 0) {
+    lista.innerHTML = "<p>Nenhum item adicionado ainda.</p>";
+    return;
+  }
+  carrinho.forEach(item => {
+    const linha = document.createElement("div");
+    linha.className = "linha-pedido";
+    if (item.tipo === "hamburguer") {
+      let extrasTexto = item.adicionais.length? item.adicionais.map(e => e.nome).join(", ") : "Nenhum adicional";
+      linha.innerHTML = `<strong>${item.nome}</strong><br>Adicionais: ${extrasTexto}<br>R$ ${precoItem(item).toFixed(2).replace(".", ",")}`;
+    } else {
+      linha.innerHTML = `<strong>${item.quantidade}x ${item.nome}</strong><br>R$ ${precoItem(item).toFixed(2).replace(".", ",")}`;
+    }
+    lista.appendChild(linha);
+  });
+}
+function atualizarQuantidades() {
+  const todos = [...tradicionais,...artesanais,...porcoes,...bebidas,...cervejas,...macarrao];
+  todos.forEach(item => {
+    const id = "qtd-" + item.nome.replace(/\s/g, "-");
+    const elemento = document.getElementById(id);
+    if (!elemento) return;
+    if (tradicionais.includes(item) || artesanais.includes(item)) {
+      const quantidade = carrinho.filter(c => c.tipo === "hamburguer" && c.nome === item.nome).length;
+      elemento.textContent = quantidade;
+    } else {
+      const encontrado = carrinho.find(c => c.tipo === "direto" && c.nome === item.nome);
+      elemento.textContent = encontrado? encontrado.quantidade : 0;
+    }
+  });
+}
+function calcularSubtotal() {
+  return carrinho.reduce((total, item) => total + precoItem(item), 0);
+}
+function formatarCEP(input) {
+  let valor = input.value.replace(/\D/g, "");
+  if (valor.length > 5) valor = valor.substring(0, 5) + "-" + valor.substring(5, 8);
+  input.value = valor;
+}
+async function buscarCEP() {
+  const cep = document.getElementById("cep").value.replace(/\D/g, "");
+  if (cep.length!== 8) return;
+  try {
+    const resposta = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+    const dados = await resposta.json();
+    if (dados.erro) { alert("CEP não encontrado."); return; }
+    document.getElementById("rua").value = dados.logradouro || "";
+    document.getElementById("bairro").value = dados.bairro || "";
+    document.getElementById("cidade").value = dados.localidade || "";
+    document.getElementById("estado").value = dados.uf || "";
+    calcularDistancia();
+  } catch (erro) {
+    console.log(erro);
+    alert("Não foi possível buscar o CEP agora.");
+  }
+}
+let distanciaKm = 0;
+let frete = 0;
+async function geocodificar(endereco) {
+  const url = "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" + encodeURIComponent(endereco);
+  const resposta = await fetch(url, { headers: { "Accept-Language": "pt-BR" } });
+  const dados = await resposta.json();
+  if (!dados.length) throw new Error("Endereço não encontrado.");
+  return { lat: Number(dados[0].lat), lon: Number(dados[0].lon) };
+}
+async function calcularDistancia() {
+  if (document.getElementById("formaEntrega").value!== "delivery") {
+    distanciaKm = 0; frete = 0; atualizarFrete(); return;
+  }
+  const rua = document.getElementById("rua").value;
+  const numero = document.getElementById("numero").value;
+  const bairro = document.getElementById("bairro").value;
+  const cidade = document.getElementById("cidade").value;
+  if (!rua ||!numero ||!cidade) return;
+  const enderecoCliente = `${rua}, ${numero}, ${bairro}, ${cidade}, MG, Brasil`;
+  try {
+    document.getElementById("distanciaTexto").textContent = "Calculando...";
+    const loja = await geocodificar(ENDERECO_LOJA);
+    const cliente = await geocodificar(enderecoCliente);
+    const rotaURL = `https://router.project-osrm.org/route/v1/driving/${loja.lon},${loja.lat};${cliente.lon},${cliente.lat}?overview=false`;
+    const resposta = await fetch(rotaURL);
+    const dados = await resposta.json();
+    if (!dados.routes ||!dados.routes.length) throw new Error("Rota não encontrada.");
+    distanciaKm = dados.routes[0].distance / 1000;
+    frete = Math.max(2, Math.ceil(distanciaKm) * 2);
+    atualizarFrete();
+  } catch (erro) {
+    console.log(erro);
+    document.getElementById("distanciaTexto").textContent = "Não foi possível calcular automaticamente.";
+    frete = 0; atualizarFrete();
+  }
+}
+function atualizarFrete() {
+  const forma = document.getElementById("formaEntrega").value;
+  if (forma!== "delivery") {
+    document.getElementById("distanciaTexto").textContent = "Não se aplica";
+    document.getElementById("freteTexto").textContent = "R$ 0,00";
+    atualizarTotal(); return;
+  }
+  document.getElementById("distanciaTexto").textContent = distanciaKm > 0? `${distanciaKm.toFixed(2).replace(".", ",")} km` : "Aguardando endereço...";
+  document.getElementById("freteTexto").textContent = `R$ ${frete.toFixed(2).replace(".", ",")}`;
+  atualizarTotal();
+}
+function atualizarTotal() {
+  const subtotal = calcularSubtotal();
+  const total = subtotal + (document.getElementById("formaEntrega").value === "delivery"? frete : 0);
+  document.getElementById("total").textContent = `R$ ${total.toFixed(2).replace(".", ",")}`;
+}
+function atualizarEntrega() {
+  const forma = document.getElementById("formaEntrega").value;
+  const campos = document.getElementById("enderecoCampos");
+  if (forma === "delivery") {
+    campos.style.display = "grid";
+    calcularDistancia();
+  } else {
+    campos.style.display = "none";
+    distanciaKm = 0; frete = 0; atualizarFrete();
+  }
+}
+function atualizarTudo() {
+  atualizarResumo();
+  atualizarQuantidades();
+  atualizarTotal();
+}
+function enviarWhatsApp() {
+  if (carrinho.length === 0) { alert("Adicione pelo menos um item ao pedido."); return; }
+  const nome = document.getElementById("nome").value.trim();
+  const telefone = document.getElementById("telefone").value.trim();
+  const forma = document.getElementById("formaEntrega").value;
+  const observacao = document.getElementById("observacao").value.trim();
+  if (!nome) { alert("Digite seu nome."); return; }
+  if (!telefone) { alert("Digite seu telefone."); return; }
+  if (forma === "delivery" && (!document.getElementById("cep").value ||!document.getElementById("numero").value)) {
+    alert("Preencha o CEP e o número da casa."); return;
+  }
+  let mensagem = `🍔 *NOVO PEDIDO — AMOR’IN BURGUER*%0A%0A`;
+  mensagem += `👤 *Nome:* ${nome}%0A`;
+  mensagem += `📱 *Telefone:* ${telefone}%0A%0A`;
+  mensagem += `🛒 *PEDIDO:*%0A`;
+  carrinho.forEach(item => {
+    if (item.tipo === "hamburguer") {
+      const extras = item.adicionais.length? item.adicionais.map(e => `${e.nome} (+R$ ${e.preco.toFixed(2).replace(".", ",")})`).join(", ") : "Nenhum adicional";
+      mensagem += `• ${item.nome}%0A Adicionais: ${extras}%0A R$ ${precoItem(item).toFixed(2).replace(".", ",")}%0A%0A`;
+    } else {
+      mensagem += `• ${item.quantidade}x ${item.nome} — R$ ${precoItem(item).toFixed(2).replace(".", ",")}%0A`;
+    }
+  });
+  const subtotal = calcularSubtotal();
+  mensagem += `%0A💰 *Subtotal:* R$ ${subtotal.toFixed(2).replace(".", ",")}%0A`;
+  if (forma === "delivery") {
+    const rua = document.getElementById("rua").value;
+    const numero = document.getElementById("numero").value;
+    const bairro = document.getElementById("bairro").value;
+    const cidade = document.getElementById("cidade").value;
+    const cep = document.getElementById("cep").value;
+    mensagem += `🚚 *Delivery*%0A📍 ${rua}, ${numero} — ${bairro}%0A${cidade} — CEP ${cep}%0A📏 Distância: ${distanciaKm.toFixed(2).replace(".", ",")} km%0A🚚 Frete: R$ ${frete.toFixed(2).replace(".", ",")}%0A`;
+  }
+  if (forma === "retirada") mensagem += `🏪 *Retirada no local*%0A`;
+  if (forma === "local") mensagem += `🍔 *Consumo no local*%0A`;
+  const total = subtotal + (forma === "delivery"? frete : 0);
+  mensagem += `%0A💵 *TOTAL: R$ ${total.toFixed(2).replace(".", ",")}*%0A`;
+  if (observacao) mensagem += `%0A📝 *Observação:* ${observacao}%0A`;
+  const url = `https://wa.me/${WHATSAPP}?text=${mensagem}`;
+  window.open(url, "_blank");
+}
+
+criarHamburgueres(tradicionais, "tradicionais");
+criarHamburgueres(artesanais, "artesanais");
+criarDiretos(porcoes, "porcoes");
+criarDiretos(bebidas, "bebidas");
+criarDiretos(cervejas, "cervejas");
+criarDiretos(macarrao, "macarrao");
+atualizarTudo();
+</script>
+</body>
+</html>
